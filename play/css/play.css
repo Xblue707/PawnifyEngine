@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400&family=Montserrat:wght@100&family=Varela+Round&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;900&family=Source+Sans+3:wght@200&display=swap');
 body {
     /* background-color: rgb(255, 255, 255); */
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    font-family: Lato;
+    font-family: Montserrat;
+    font-weight: 500;
 }
 
 .sidebar {
@@ -342,7 +342,7 @@ h2 {
     padding-right: 5px;
     padding-top: -50px;
     position: relative;
-    left: 260px;
+    left: 245px;
 }
 
 #whiteTime{
@@ -521,5 +521,5 @@ h2 {
 }
 
 #endScreenSmallTitle {
-    margin-left: 150px;
+    text-align: center;
 }
