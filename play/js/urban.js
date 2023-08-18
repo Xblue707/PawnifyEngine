@@ -1,4 +1,3 @@
-//urban.js uses https://github.com/jhlywa/chess.js/tree/v0.1
 var colourToMove = localStorage.getItem("colourToMove");
 var stockfishStrength = localStorage.getItem("v1input");
 stockfishStrength -= 1320;
@@ -455,6 +454,8 @@ if (colourToMove == 'white') {
     // var endScreenPopup = document.getElementById("endScreen");
     // endScreenPopup.modal("show");
     $('#endScreen').modal('show');
+    document.getElementById("endScreenBigTitle").style.color = 'white';
+    document.getElementById("endScreenSmallTitle").style.color = 'white';
     //Set the colourToWin variable
     console.log(game.in_checkmate());
     if (game.in_checkmate() === true) {
@@ -497,7 +498,7 @@ if (colourToMove == 'white') {
       // Add an event listener to the modal element to detect when it is shown
       document.getElementById('endScreenBigTitle').innerHTML = 'You win!';
       document.getElementById("endScreenSmallTitle").innerHTML = 'By ' + wayOfWin;
-      document.getElementById('endScreenHeader').style.color = 'rgb(28, 126, 4)';
+      document.getElementById('endScreenHeader').style.backgroundColor = 'rgb(28, 126, 4)';
       modal.addEventListener("shown.bs.modal", function () {
         // Wait for two seconds before animating the borders
         setTimeout(function () {
@@ -521,7 +522,7 @@ if (colourToMove == 'white') {
       // Add an event listener to the modal element to detect when it is shown
       document.getElementById('endScreenBigTitle').innerHTML = 'You lose!';
       document.getElementById("endScreenSmallTitle").innerHTML = 'By ' + wayOfWin;
-      document.getElementById('endScreenHeader').style.color = 'rgb(255, 0, 0)';
+      document.getElementById('endScreenHeader').style.backgroundColor = 'red';
       modal.addEventListener("shown.bs.modal", function () {
         // Wait for two seconds before animating the borders
         setTimeout(function () {
@@ -533,7 +534,7 @@ if (colourToMove == 'white') {
       // Add an event listener to the modal element to detect when it is shown
       document.getElementById('endScreenBigTitle').innerHTML = 'You lose!';
       document.getElementById("endScreenSmallTitle").innerHTML = 'By ' + wayOfWin;
-      document.getElementById('endScreenHeader').style.color = 'rgb(255, 0, 0)';
+      document.getElementById('endScreenHeader').style.backgroundColor = 'rgb(255, 0, 0)';
       modal.addEventListener("shown.bs.modal", function () {
         // Wait for two seconds before animating the borders
         setTimeout(function () {
@@ -544,7 +545,7 @@ if (colourToMove == 'white') {
     else {
       document.getElementById('endScreenBigTitle').innerHTML = 'Draw';
       document.getElementById("endScreenSmallTitle").innerHTML = 'By ' + wayOfWin;
-      document.getElementById('endScreenHeader').style.color = '#B4B0B0';
+      document.getElementById('endScreenHeader').style.backgroundColor = '#B4B0B0';
     }
 
     //Code for "Copy PGN" button
@@ -554,21 +555,6 @@ if (colourToMove == 'white') {
       navigator.clipboard.writeText(pgn);
       document.getElementById("copyPGN").innerHTML = "Copied to Clipboard!";
     });
-    //Code for "Play Again" button
-    //Set the wayOfWin variable
-    // if (game.in_checkmate() === true) {
-    //   wayOfWin = 'Checkmate';
-    // } else if (game.in_stalemate() === true) {
-    //   wayOfWin = 'Stalemate';
-    // } else if (game.in_threefold_repetition() === true) {
-    //   wayOfWin = 'Threefold repetition';
-    // } else if (game.insufficient_material() === true) {
-    //   wayOfWin = 'Insufficient material';
-    // } else if (game.in_draw() === true && game.insufficient_material() === false) {
-    //   wayOfWin = '50-move rule';
-    // } else {
-    //   wayOfWin = 'Resignation';
-    // }
   }
 
   //Code for the Green-Border Animation
@@ -576,32 +562,6 @@ if (colourToMove == 'white') {
   var playerLogo = document.querySelector(".playerLogo");
   var stockfishLogo = document.querySelector(".stockfishLogo");
   function animateBorder(image) {
-    // image.style.borderWidth = "5px";
-    // image.style.borderColor = "green";
-    // // Define a variable to store the current border width
-    // var currentWidth = 5;
-    // // Define a variable to store the increment or decrement value
-    // var delta = 1;
-    // // Define a function to update the border width
-    // function updateBorder() {
-    //   // Increase or decrease the current border width by delta
-    //   currentWidth += delta;
-    //   // If the current border width reaches 10 or 0, reverse the delta value
-    //   if (currentWidth === 10 || currentWidth === 0) {
-    //     delta = -delta;
-    //   }
-    //   // Set the new border width to the image element
-    //   image.style.borderWidth = currentWidth + "px";
-    // }
-    // // Call the updateBorder function every 50 milliseconds for 10 times
-    // var count = 0;
-    // var interval = setInterval(function () {
-    //   updateBorder();
-    //   count++;
-    //   if (count === 10) {
-    //     clearInterval(interval);
-    //   }
-    // }, 50);
     image.style.outlineWidth = '7px';
 
   }
@@ -1064,16 +1024,132 @@ else {
       moveForward();
     }
   });
-  /*
   function endGame() {
+    var win = 0;
+    var lose = 0;
+    var draw = 0;
+    console.log("hi");
     userGameEnd = 1;
     userTakeBacks = 2147483647;
     cfg.draggable = false;
     cfg.position = board.position();
     board = ChessBoard('board', cfg);
     document.getElementById('sound').innerHTML = '<audio autoplay preload controls> <source src="sound/game-end.mp3" type="audio/mp3" /> </audio>';
+    //Code added for End Screen
+    // var endScreenPopup = document.getElementById("endScreen");
+    // endScreenPopup.modal("show");
+    $('#endScreen').modal('show');
+    document.getElementById("endScreenBigTitle").style.color = 'white';
+    document.getElementById("endScreenSmallTitle").style.color = 'white';
+    //Set the colourToWin variable
+    console.log(game.in_checkmate());
+    if (game.in_checkmate() === true) {
+      colourToWin = (game.turn() === 'w') ? 'black wins' : 'white wins';
+      (game.turn() === 'w') ? lose = 1 : win = 1;
+      wayOfWin = 'Checkmate';
+    }
+    else if (whiteTime == 0) {
+      colourToWin = 'black wins';
+      lose = 1;
+      wayOfWin = 'Timeout';
+    } else if (blackTime == 0) {
+      colourToWin = 'white wins';
+      win = 1;
+      wayOfWin = 'Timeout';
+    } else if (game.in_stalemate() === true || game.in_threefold_repetition() === true || game.insufficient_material() === true) {
+      colourToWin = 'draw';
+      draw = 1;
+      if (game.in_stalemate()) wayOfWin = 'Stalemate';
+      else if (game.in_threefold_repetition()) wayOfWin = 'Threefold Repetition';
+      else wayOfWin = 'Insufficient Material';
+    } else if (game.in_draw === true && game.insufficient_material() === false) {
+      // The game is a draw by the 50-move rule
+      colourToWin = 'draw';
+      draw = 1;
+      wayOfWin = '50-move rule';
+    } else {
+      //The game is lost by Resignation
+      if (colourToMove == 'white') {
+        colourToWin = 'black wins';
+        lose = 1;
+      } else {
+        colourToWin = 'white wins';
+        win = 1;
+      }
+    }
+    console.log(wayOfWin);
+    // Win-loss If conditions
+    if (colourToWin == 'white wins' && colourToMove == 'white') {
+      // Add an event listener to the modal element to detect when it is shown
+      document.getElementById('endScreenBigTitle').innerHTML = 'You win!';
+      document.getElementById("endScreenSmallTitle").innerHTML = 'By ' + wayOfWin;
+      document.getElementById('endScreenHeader').style.backgroundColor = 'rgb(28, 126, 4)';
+      modal.addEventListener("shown.bs.modal", function () {
+        // Wait for two seconds before animating the borders
+        setTimeout(function () {
+          animateBorder(playerLogo);
+        }, 200);
+      });
+    }
+    else if (colourToWin == 'black wins' && colourToMove == 'black') {
+      // Add an event listener to the modal element to detect when it is shown
+      document.getElementById('endScreenBigTitle').innerHTML = 'You win!';
+      document.getElementById("endScreenSmallTitle").innerHTML = 'By ' + wayOfWin;
+      document.getElementById('endScreenHeader').style.backgroundColor = 'rgb(28, 126, 4)';
+      modal.addEventListener("shown.bs.modal", function () {
+        // Wait for two seconds before animating the borders
+        setTimeout(function () {
+          animateBorder(playerLogo);
+        }, 200);
+      });
+    }
+    else if (colourToWin == 'white wins' && colourToMove == 'black') {
+      // Add an event listener to the modal element to detect when it is shown
+      document.getElementById('endScreenBigTitle').innerHTML = 'You lose!';
+      document.getElementById("endScreenSmallTitle").innerHTML = 'By ' + wayOfWin;
+      document.getElementById('endScreenHeader').style.backgroundColor = 'red';
+      modal.addEventListener("shown.bs.modal", function () {
+        // Wait for two seconds before animating the borders
+        setTimeout(function () {
+          animateBorder(stockfishLogo);
+        }, 200);
+      });
+    }
+    else if (colourToWin == 'black wins' && colourToMove == 'white') {
+      // Add an event listener to the modal element to detect when it is shown
+      document.getElementById('endScreenBigTitle').innerHTML = 'You lose!';
+      document.getElementById("endScreenSmallTitle").innerHTML = 'By ' + wayOfWin;
+      document.getElementById('endScreenHeader').style.backgroundColor = 'rgb(255, 0, 0)';
+      modal.addEventListener("shown.bs.modal", function () {
+        // Wait for two seconds before animating the borders
+        setTimeout(function () {
+          animateBorder(stockfishLogo);
+        }, 200);
+      });
+    }
+    else {
+      document.getElementById('endScreenBigTitle').innerHTML = 'Draw';
+      document.getElementById("endScreenSmallTitle").innerHTML = 'By ' + wayOfWin;
+      document.getElementById('endScreenHeader').style.backgroundColor = '#B4B0B0';
+    }
+
+    //Code for "Copy PGN" button
+    document.getElementById("copyPGN").addEventListener("click", function () {
+      console.log("pog");
+      var pgn = game.pgn();
+      navigator.clipboard.writeText(pgn);
+      document.getElementById("copyPGN").innerHTML = "Copied to Clipboard!";
+    });
   }
-  */
+
+  //Code for the Green-Border Animation
+  var modal = document.getElementById("endScreen");
+  var playerLogo = document.querySelector(".playerLogo");
+  var stockfishLogo = document.querySelector(".stockfishLogo");
+  function animateBorder(image) {
+    image.style.outlineWidth = '7px';
+
+  }
   function displayLines() {
     if (document.getElementById("linesSwitch").checked === true) {
       document.getElementById("lines").style.display = "block";
