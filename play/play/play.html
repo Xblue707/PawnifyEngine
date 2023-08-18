@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Graphical User Interface for stockfish.js</title>
+    <link rel="stylesheet" href="css/chessboard.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Bootstrap CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--External CSS file-->
+    <link rel="stylesheet" href="css/play.css">
+    <style type="text/css">
+        <!--
+        body,
+        td,
+        th {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .hideme {
+            display: none;
+        }
+
+        .highlight-white {
+            box-shadow: inset 0 0 3px 3px yellow;
+        }
+
+        .highlight-black {
+            box-shadow: inset 0 0 3px 3px blue;
+        }
+        -->
+    </style>
+</head>
+
+<body>
+    <div class="stockfishInfo">
+        <div id="board" style="width: 700px">
+            <div id="gameEnd">
+                <div id="gameEndText"></div>
+                <form action=""><input type="submit" value="New Game"></form>
+                </div>
+                </div>
+                </div>
+                <div class="sidebar">
+                    <div class="d-flex justify-content-start">
+                        <img class="leelaimg" src="img/leela_logo.png">
+                        <p class="leela_name">Leela Chess Zero</p>
+                        </div>
+                        <div class="section">
+                            <div class="d-flex justify-content-start sidebarTopRow">
+                                <p class="eval_switch_label">Evaluation</p>
+                                <!-- Rounded switch -->
+                                <label class="switch" id="eval_button">
+                                    <input type="checkbox" id="evalSwitch" onclick="displayEval()" checked>
+                                    <span class="slider round"></span>
+                                    </label>
+                                    <p class="lines_switch_label">Lines</p>
+                                    <!-- Rounded switch -->
+                                    <label class="switch" id="lines_button">
+                                        <input type="checkbox" id="linesSwitch" onclick="displayLines()" checked>
+                                        <span class="slider round"></span>
+                                        </label>
+                                        </div>
+                                        <h2 id="thisisjustherecusineedittobe">Lines</h2>
+                                        <div id="lines">
+                <div class="line1">
+                    <span id="num1">1. </span>
+                    <span id="evalnum1" class="evalnum"></span>
+                    <span id="eval_1"></span>
+                    </div>
+                    <div class="line2">
+                        <span id="num2">2. </span>
+                        <span id="evalnum2" class="evalnum"></span>
+                        <span id="eval_2"></span>
+                        </div>
+                        <div class="line3">
+                            <span id="num3">3. </span>
+                            <span id="evalnum3" class="evalnum"></span>
+                            <span id="eval_3"></span>
+                            </div>
+                            <div class="line4">
+                                <span id="num4">4. </span>
+                                <span id="evalnum4" class="evalnum"></span>
+                                <span id="eval_4"></span>
+                                </div>
+                                <div class="line5">
+                                    <span id="num5">5. </span>
+                                    <span id="evalnum5" class="evalnum"></span>
+                                    <span id="eval_5"></span>
+                                    </div>
+                                    <div class="line6">
+                    <span id="num6">6. </span>
+                    <span id="evalnum6" class="evalnum"></span>
+                    <span id="eval_6"></span>
+                    </div>
+                    <div class="line7">
+                        <span id="num7">7. </span>
+                        <span id="evalnum7" class="evalnum"></span>
+                        <span id="eval_7"></span>
+                        </div>
+                        <div class="line8">
+                            <span id="num8">8. </span>
+                            <span id="evalnum8" class="evalnum"></span>
+                            <span id="eval_8"></span>
+                            </div>
+                            <div class="line9">
+                                <span id="num9">9. </span>
+                                <span id="evalnum9" class="evalnum"></span>
+                                <span id="eval_9"></span>
+                                </div>
+                                <div class="line10">
+                                    <span id="num10">10. </span>
+                                    <span id="evalnum10" class="evalnum"></span>
+                                    <span id="eval_10"></span>
+                                    </div>
+                                    </div>
+                                    <h2>Moves</h2>
+                                    <div id="moves">
+                                        </div>
+                                        
+                                        <div class="buttons">
+                                            <button id="backward-button" class="btn btn-light btn-lg" onclick="moveBackward()">
+                                                <</button>
+                                                <button id="forward-button" class="btn btn-light btn-lg" onclick="moveForward()">></button>
+                                                <button id="resign" class="btn btn-light btn-lg" onclick="endGame()">Resign</button>
+                                                </div>
+                                                </div>
+    </div>
+    <div id="whiteTime"><span class="clock">White: </span><span id="time1" class="clock">0:00</span></div>
+    <div id="blackTime"><span class="clock">Black: </span><span id="time2" class="clock">0:00</span></div>
+    <div id="sound" class="hideme"></div>
+    <script src="js/json3.min.js"></script>
+    <script src="js/jquery-1.10.1.min.js"></script>
+    <script src="js/chessboard.js"></script>
+    <script src="js/chess.js"></script>
+    <script src="js/urban.js"></script>
+    <script src="js/play.js"></script>
+    </body>
+    
+    </html>

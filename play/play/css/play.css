@@ -1,0 +1,346 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400&family=Montserrat:wght@100&family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@200&display=swap');
+
+body {
+    background-color: rgb(255, 255, 255);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: Lato;
+}
+
+.sidebar {
+    position: absolute;
+    top: 2rem;
+    right: 10rem;
+    width: 30rem;
+    height: 37rem;
+    border-bottom-color: rgb(0, 0, 0);
+}
+
+.leelaimg {
+    height: 3rem;
+}
+
+.leela_name {
+    padding-left: 0.3rem;
+    color: rgb(0, 0, 0);
+    font-size: 1.2rem;
+    font-family: Lato;
+    font-weight: bolder;
+    padding-bottom: 1.5rem;
+}
+
+.section {
+    background-color: rgba(255, 255, 255, 0);
+    width: auto;
+    height: 51rem;
+    padding: 0.5rem;
+    border-radius: 10px;
+    margin-top: -0.35rem;
+    border-style: solid;
+    border-color: black;
+}
+
+.eval_switch_label {
+    color: rgb(0, 0, 0);
+    font-size: 1.2rem;
+    font-family: Lato;
+    font-weight: bolder;
+    padding-right: 0.3rem;
+}
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 2.5rem;
+    height: 1.5rem;
+    padding-top: 0.3rem;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 1rem;
+    width: 1rem;
+    left: 4px;
+    bottom: 4px;
+    background-color: rgb(255, 255, 255);
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+
+input:checked+.slider {
+    background-color: #769656;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #769656;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(1rem);
+    -ms-transform: translateX(1rem);
+    transform: translateX(1rem);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.lines_switch_label {
+    color: rgb(0, 0, 0);
+    font-size: 1.2rem;
+    font-family: Lato;
+    font-weight: bolder;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+}
+
+h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: rgb(0, 0, 0);
+}
+
+.move {
+    display: flex;
+    align-items: center;
+    padding-left: 0.5rem;
+}
+
+.white,
+.black {
+    font-family: Lato;
+    font-size: 1rem;
+    font-weight: bolder;
+    padding: 0.5rem;
+    color: rgb(0, 0, 0);
+    margin: 0 2.5rem;
+}
+
+.icon-font-chess {
+    font-family: 'Chess Merida';
+}
+
+/* add this selector to style the move number */
+.move::before {
+    content: attr(data-whole-move-number) ".";
+    /* insert the move number and a dot before the text node */
+    color: rgb(0, 0, 0);
+    /* change the color to blue */
+    font-weight: bold;
+    /* make the font bold */
+    margin-right: 0.5em;
+    /* add some margin to the right */
+}
+
+.line1,
+.line2,
+.line3,
+.line4,
+.line5,
+.line6,
+.line7,
+.line8,
+.line9,
+.line10 {
+    color: rgb(0, 0, 0);
+    font-family: Lato;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+}
+
+#evalnum1,
+#evalnum2,
+#evalnum3,
+#evalnum4,
+#evalnum5,
+#evalnum6,
+#evalnum7,
+#evalnum8,
+#evalnum9,
+#evalnum10,
+#num1,
+#num2,
+#num3,
+#num4,
+#num5,
+#num6,
+#num7,
+#num8,
+#num9,
+#num10 {
+    font-weight: bolder;
+}
+
+#backward-button,
+#forward-button,
+#resign {
+    color: rgb(255, 255, 255);
+    background-color: rgb(173, 173, 173);
+    font-size: 1.5rem;
+    border-color: rgb(173, 173, 173);
+    position: absolute;
+    width: 150px;
+    top: 810px;
+}
+
+#backward-button:hover,
+#forward-button:hover,
+#resign:hover {
+    background-color: rgb(84, 84, 84);
+    border-color: rgb(84, 84, 84);
+}
+
+#forward-button {
+    left: 165px;
+}
+
+#resign {
+    left: 322px;
+}
+
+.tableText {
+    color: rgb(0, 0, 0);
+}
+
+.stockfishInfo {
+    position: absolute;
+    margin-left: 300px;
+    margin-top: 115px;
+}
+
+#gameEnd {
+    display: none;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: rgb(0, 0, 0);
+    text-align: center;
+    width: 594px;
+    height: 198px;
+    position: absolute;
+    margin-top: 300px;
+    left: 252px;
+    animation-name: endgame;
+}
+
+@keyframes endgame {
+    0% {
+        margin-top: 300px;
+    }
+}
+
+#moves {
+    color: rgb(0, 0, 0);
+    font-size: 32px;
+    /* text-align: center; */
+    height: 450px;
+    overflow: auto;
+}
+
+#lines {
+    text-align: center;
+    height: 100px;
+    overflow: auto;
+}
+
+.sidebarTopRow {
+    text-align: center;
+    margin-left: 120px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #a6a6a6;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #747474;
+}
+
+.moveonsidebar:hover {
+    color: #747474;
+    cursor: pointer;
+}
+
+.moveNumber {
+    position: relative;
+    display: inline-block;
+    width: 0px;
+    margin-left: 40px;
+}
+
+.whiteMove {
+    position: relative;
+    display: inline-block;
+    width: 0px;
+    margin-left: 130px;
+}
+
+.blackMove {
+    position: relative;
+    display: inline-block;
+    width: 0px;
+    margin-left: 150px;
+}
+
+#sync {
+    color: black;
+}
+
+.clock{
+    color: rgb(0, 0, 0);
+}
+
+#whiteTime{
+    position: absolute;
+    font-size: 300%;
+    left: 310px;
+    top: 820px;
+}
+
+#blackTime{
+    position: absolute;
+    font-size: 300%;
+    left: 310px;
+    top: 30px;
+}

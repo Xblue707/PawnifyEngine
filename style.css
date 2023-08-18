@@ -1,0 +1,57 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Montserrat&family=Open+Sans&family=Roboto&display=swap"
+);
+
+@media only screen and (min-width: 320px) {
+    html {
+        font-size: 0.7rem;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    html {
+        font-size: 0.8rem;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    html {
+        font-size: 0.9rem;
+    }
+}
+
+body {
+    background-color: black;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+h1 {
+    text-align: center;
+    font-family: Lato;
+    color: white;
+    padding-top: 1rem;
+    font-weight: bold;
+}
+
+p {
+    text-align: center;
+    font-family: Lato;
+    color: white;
+    padding: 2rem;
+    padding-top: 1rem;
+    font-size: 1.05rem;
+}
+
+#intro {
+    padding-bottom: 0.5rem;
+}
+
+.btn-custom {
+    background-color: #f8f9fa;
+    color: black;
+    border-radius: 20px;
+    font-family: Montserrat;
+    font-weight: bold;
+    width: 15rem;
+}

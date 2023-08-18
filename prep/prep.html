@@ -1,0 +1,312 @@
+<!--At the bottom of this code, there should be a "play" button which redirects to play.html-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Prep against Stockfish</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Bootstrap CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--External CSS file-->
+    <link rel="stylesheet" href="prep.css">
+    <!--Chessboard.css-->
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css" integrity="sha384-q94+BZtLrkL1/ohfjR8c6L+A6qzNH9R2hBLwyoAfu3i/WCvQjzL2RQJ3uNHDISdU" crossorigin="anonymous">
+</head>
+<body>
+    <div class="row container align-items-center justify-content-center">
+        <div class="col-6" id="myBoard"></div>
+        <div id="adjustBoard" class="col-sm-1 vstack gap-2 align-self-start">
+            <input id="flipBtn" type="image" src="img/flip_board.png" alt="Flip Board"></input>
+            <input id="startBtn" type="image" src="img/reset_board.png" alt="Reset Board"></input>
+            <input id="clearBtn" type="image" src="img/clear_board.png" alt="Clear Board"></input>
+        </div>
+        <div class="sidebar col-5">
+            <h2>Customise Stockfish</h2>
+            <p class="sidebarHeader2">Take note that any variables (imput box) left blank will not be used when playing Stockfish.</p>
+            <hr>
+            <p class="sidebarHeader1">I play as:</p>
+            <div class="row d-flex justify-content-center">
+                <input class="colourBtn" id="whiteToMove" type="image" src="img/white_to_move.png" alt="White to Move"></input>
+                <input class="colourBtn" id="randomToMove" type="image" src="img/random_to_move.png" alt="Random"></input>
+                <input class="colourBtn" id="blackToMove" type="image" src="img/black_to_move.png" alt="Black to Move"></input>
+            </div>
+            <div class="container">
+                <!-- Centralised header -->
+                <p class="sidebarHeader1">Time Control</p>
+              
+                <!-- Subheader and input fields for white -->
+                <div class="row">
+                        <p class="text-start">White:</p>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-4">
+                            <input id="whiteTimeControlMin" type="number" class="form-control" placeholder="min" min="0">
+                            </div>
+                            <div class="col-4">
+                            <input id="whiteTimeControlSec" type="number" class="form-control" placeholder="sec" min="0">
+                            </div>
+                            <div class="col-4">
+                            <input id="whiteTimeControlBonusSec" type="number" class="form-control" placeholder="bonus (sec)" min="0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              
+                <!-- Subheader and input fields for black -->
+                <div class="row">
+                        <p class="text-start black-padding-top">Black:</p>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-4">
+                            <input id="blackTimeControlMin" type="number" class="form-control" placeholder="min" min="0">
+                            </div>
+                            <div class="col-4">
+                            <input id="blackTimeControlSec" type="number" class="form-control" placeholder="sec" min="0">
+                            </div>
+                            <div class="col-4">
+                            <input id="blackTimeControlBonusSec" type="number" class="form-control" placeholder="bonus (sec)" min="0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--After some testing, it turns out that there is a priority ranking when it comes to commands. Below is a list showing this: (from most important to least important)
+            setoption name <id> value <x>
+            Move time parameter
+            Go nodes
+            Go depth
+                I have found out that the movetime parameter has the number one priority. For example, the output of running "go nodes 1000000 movetime 1" is does not reach the nodes goal, as it has to be completed in one milisecond. -->
+            <!--Variable 1: Playing Strength-->
+            <!--Message for Wei Yu: When processsing the data, make sure that anything below 1320 will be 1320, anything above 3190 will be 3190, and any fractional value will be rounded to the nearest whole number.-->
+            <div class="justify-content-left variable-flex">
+                <div>
+                    <p class="sidebarHeader2">Playing Strength</p>
+                    <img src="img/question_mark.png" alt="Question Mark" class="questionMark" id="v1questionMark">
+                </div>
+                <div class="col-4 div-for-variable-imput-box">
+                  <input id="uciElo" type="number" class="form-control" value="1320" min="1320" max="2850">
+                </div>
+            </div>
+            <p class="messageBox" id="v1messageBox">The playing strength of Stockfish refers to its elo, which can vary from 1320 to 2850.</p>
+            <input type="range" class="form-control-range slider col-12" id="uciEloSlider" value="1320" min="1320" max="2850">
+            <div class="justify-content-left variable-flex slider-value-margin">
+                <p>1320</p>
+                <p>2850</p>
+            </div>
+            <!--Variable 2: Move time-->
+            <div class="justify-content-left variable-flex">
+                <div>
+                    <p class="sidebarHeader2">Move Time</p>
+                    <img src="img/question_mark.png" alt="Question Mark" class="questionMark" id="v2questionMark">
+                </div>
+                <div class="col-4 div-for-variable-imput-box">
+                  <input id="moveTime" type="number" class="form-control" value="2" min="0.001" max="30">
+                </div>
+            </div>
+            <p class="messageBox" id="v2messageBox">The time, in seconds, allocated to Stockfish for each move.</p>
+            <input type="range" class="form-control-range slider col-12" id="moveTimeSlider" value="2000" min="1" max="30000">
+            <div class="justify-content-left variable-flex slider-value-margin">
+                <p>0.001</p>
+                <p>30</p>
+            </div>
+            <!--Variable 3: Threads-->
+            <div class="justify-content-left variable-flex">
+                <div>
+                    <p class="sidebarHeader2">Threads</p>
+                    <img src="img/question_mark.png" alt="Question Mark" class="questionMark" id="v3questionMark">
+                </div>
+                <div class="col-4 div-for-variable-imput-box">
+                  <input id="threads" type="number" class="form-control" value="1" min="1" max="30">
+                </div>
+            </div>
+            <p class="messageBox" id="v3messageBox">The number of CPU threads used to search positions. Set this to the number of available CPU cores for optimal performance.</p>
+            <input type="range" class="form-control-range slider col-12" id="threadsSlider" value="1" min="1" max="30">
+            <div class="justify-content-left variable-flex slider-value-margin">
+                <p>1</p>
+                <p>30</p>
+            </div>
+            <!--Variable 4: Hash Size-->
+            <div class="justify-content-left variable-flex">
+                <div>
+                    <p class="sidebarHeader2">Hash Size</p>
+                    <img src="img/question_mark.png" alt="Question Mark" class="questionMark" id="v4questionMark">
+                </div>
+                <div class="col-4 div-for-variable-imput-box">
+                  <input id="hashSize" type="number" class="form-control" value="32" min="1" max="100">
+                </div>
+            </div>
+            <p class="messageBox" id="v4messageBox">The amount of hash table for Stockfish in MB, which refers to saved information about analysed positions.</p>
+            <input type="range" class="form-control-range slider col-12" id="hashSizeSlider" value="32" min="1" max="100">
+            <div class="justify-content-left variable-flex slider-value-margin">
+                <p>1</p>
+                <p>100</p>
+            </div>
+            <!--Varaible 5: Contempt Level-->
+            <div class="justify-content-left variable-flex">
+                <div>
+                    <p class="sidebarHeader2">Contempt Level</p>
+                    <img src="img/question_mark.png" alt="Question Mark" class="questionMark" id="v5questionMark">
+                </div>
+                <div class="col-4 div-for-variable-imput-box">
+                  <input id="contemptLevel" type="number" class="form-control" value="24" min="-100" max="100">
+                </div>
+            </div>
+            <p class="messageBox" id="v5messageBox">The higher the contempt value, the more reluctant Stockfish is to aim for draws, and vice versa.</p>
+            <input type="range" class="form-control-range slider col-12" id="contemptLevelSlider" value="24" min="-100" max="100">
+            <div class="justify-content-left variable-flex slider-value-margin">
+                <p>-100</p>
+                <p>100</p>
+            </div>
+            <!--Variable 6: Maximum Nodes-->
+            <div class="justify-content-left variable-flex">
+                <div>
+                    <p class="sidebarHeader2">Maximum Nodes</p>
+                    <img src="img/question_mark.png" alt="Question Mark" class="questionMark" id="v6questionMark">
+                </div>
+                <div class="col-4 div-for-variable-imput-box">
+                  <input id="maximumNodes" type="number" class="form-control" value="0" min="0" max="10000">
+                </div>
+            </div>
+            <p class="messageBox" id="v6messageBox">This refers to the highest number of nodes used by Stockfish every second for analysis. A value of 0 will deactivate this variable.</p>
+            <input type="range" class="form-control-range slider col-12" id="maximumNodesSlider" value="0" min="0" max="30">
+            <div class="justify-content-left variable-flex slider-value-margin">
+                <p>0</p>
+                <p>30</p>
+            </div>
+            <!--Variable 7: Slow Mover-->
+            <div class="justify-content-left variable-flex">
+                <div>
+                    <p class="sidebarHeader2">Slow Mover</p>
+                    <img src="img/question_mark.png" alt="Question Mark" class="questionMark" id="v7questionMark">
+                </div>
+                <div class="col-4 div-for-variable-imput-box">
+                  <input id="slowMover" type="number" class="form-control" value="100" min="10" max="1000">
+                </div>
+            </div>
+            <p class="messageBox" id="v7messageBox">Lower values will make Stockfish take less time in games, higher values will make it think longer.</p>
+            <input type="range" class="form-control-range slider col-12" id="slowMoverSlider" value="100" min="10" max="1000">
+            <div class="justify-content-left variable-flex slider-value-margin">
+                <p>10</p>
+                <p>1000</p>
+            </div>
+            <!--Variable 8: Engine Lines-->
+            <div class="justify-content-left variable-flex">
+                <div>
+                    <p class="sidebarHeader2">Engine Lines</p>
+                    <img src="img/question_mark.png" alt="Question Mark" class="questionMark" id="v8questionMark">
+                </div>
+                <div class="col-4 div-for-variable-imput-box">
+                  <input id="engineLines" type="number" class="form-control" value="3" min="1" max="10">
+                </div>
+            </div>
+            <p class="messageBox" id="v8messageBox">Decide the number of Stockfish engine lines shown while playing.</p>
+            <input type="range" class="form-control-range slider col-12" id="engineLinesSlider" value="3" min="1" max="10">
+            <div class="justify-content-left variable-flex slider-value-margin">
+                <p>1</p>
+                <p>10</p>
+            </div>
+            <!--Variable 11: Number of Takebacks-->
+            <div class="justify-content-left variable-flex">
+                <div>
+                    <p class="sidebarHeader2">Number of Takebacks</p>
+                    <img src="img/question_mark.png" alt="Question Mark" class="questionMark" id="v11questionMark">
+                </div>
+                <div class="col-4 div-for-variable-imput-box">
+                  <input id="takebackNumber" type="number" class="form-control" value="3" min="0" max="20">
+                </div>
+            </div>
+            <p class="messageBox" id="v11messageBox">Choose the number of times you want to undo a move you played.</p>
+            <input type="range" class="form-control-range slider col-12" id="takebackNumberSlider" value="3" min="0" max="21">
+            <div class="justify-content-left variable-flex slider-value-margin">
+                <p>0</p>
+                <p>INF</p>
+            </div>
+            <!--Variable 9: Evaluation Type-->
+            <div class="justify-content-left variable-flex">
+                <div>
+                    <p class="sidebarHeader2">Evaluation Type</p>
+                    <img src="img/question_mark.png" alt="Question Mark" class="questionMark" id="v9questionMark">
+                </div>
+                <div class="col-5 div-for-variable-imput-box toggle-variable">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary active">
+                            <input type="radio" name="evaluationTypeOptions" id="evaluationTypeOption1" autocomplete="off" checked> Classical
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="evaluationTypeOptions" id="evaluationTypeOption2" autocomplete="off"> NNUE
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <p class="messageBox" id="v9messageBox">NNUE evaluation is more in-depth but slower than Classical Evaluation.</p>
+            <!--Variable 10: Engine Ponder-->
+            <div class="justify-content-left variable-flex">
+                <div>
+                    <p class="sidebarHeader2">Engine Ponder</p>
+                    <img src="img/question_mark.png" alt="Question Mark" class="questionMark" id="v10questionMark">
+                </div>
+                <div class="col-5 div-for-variable-imput-box toggle-variable">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary active">
+                            <input type="radio" name="enginePonderOptions" id="enginePonderOption1" autocomplete="off" checked>On</input>
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="enginePonderOptions" id="enginePonderOption2" autocomplete="off">Off</input>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <p class="messageBox" id="v10messageBox">An option to allow Stockfish to think while you are deciding on your move.</p>
+            <hr>
+            <h4>Customise Starting Position</h4>
+            <p class="sidebarHeader2">FEN:</p>
+            <input type="text" class="col-12 fen-imput-box" value="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" placeholder="Type or Paste FEN here..." id="fenImputBox" onkeydown="yes()"></input>
+            <br>
+            <br>
+            <button class="btn-group col-12 justify-content-center play-button" id="playButton">Play</button>
+        </div>
+    </div>
+    <!--DO NOT, UNDER ANY CIRCUMSTANCES, TOUCH THE BELOW SECTION OF CODE.-->
+
+    <!--Do not delete these elements below, Cruz. You are supposed to style and customise it, including the sidebar. I do not care about the way you do this; all that matters is that the end product looks IDENTICAL to the mockup. Good luck! -->
+    <!--Buttons for user to click that will decide what colour he is playing as-->
+    <!--
+    <button onclick="whiteToMove()">White to move</button>
+    <button onclick="randomToMove()">Random</button>
+    <button onclick="blackToMove()">Black to move</button>
+    -->
+    <!--Variable Imputs-->
+    <!--
+    <form>
+        <label for="elo">Strength (Elo):</label>
+        <input type="text" id="elo" name="elo"><br>
+        <label for="movetime">Move time:</label>
+        <input type="email" id="email" name="email"><br>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message"></textarea><br>
+        <input type="submit" value="Send">
+      </form>
+    -->
+
+    <!--END OF SECTION OF CODE. DO NOT TOUCH THE ABOVE CODE IN THE BODY. YOU MAY CONTINUE CODING BELOW.-->
+</body>
+<!--Chessboard.js-->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2"
+        crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"
+        integrity="sha384-8Vi8VHwn3vjQ9eUHUxex3JSN/NFqUg3QbPyX8kWyb93+8AC/pPWTzj+nHtbC5bxD"
+        crossorigin="anonymous"></script>
+<!--Chess.js-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js"
+        integrity="sha384-s3XgLpvmHyscVpijnseAmye819Ee3yaGa8NxstkJVyA6nuDFjt59u1QvuEl/mecz" 
+        crossorigin="anonymous"></script>
+<script src="prep.js"></script>
+</html>
