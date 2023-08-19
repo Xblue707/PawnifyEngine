@@ -41,8 +41,9 @@ The top section tells the user if they won/lost and by what method. The middle s
 
 ## To do list (feel free to submit a PR if you want to contribute)
 
+In order of difficulty:
 * Playing premoves
-* Toggling of different themes
 * Improving UI (problems: basic design, choppy animations etc.)
+* Toggling of different themes
 * Account system + fully working backend
 * Hosting on an online server for better experience
