@@ -14,6 +14,7 @@ var blackTime = blackSec + blackMin * 60;
 var playerLogo = document.querySelector(".playerLogo");
 var stockfishLogo = document.querySelector(".stockfishLogo");
 var moveColour = 'white';
+var premove = null;
 if (whiteMin < 10) {
   whiteMin = '0' + whiteMin;
 }
@@ -190,16 +191,18 @@ if (colourToMove == 'white') {
         if (res[0] == "bestmove" && userGameEnd == 0) {
 
           zug = res[1].split("");
+          console.log(zug);
 
           botmovesource = zug[0] + zug[1];
           botmovetarget = zug[2] + zug[3];
 
           var move = game.move({
             color: 'b',
-            from: botmovesource,
             to: botmovetarget,
+            from: botmovesource,
             promotion: 'q'
           });
+          console.log(move.from);
           $board.find('.' + squareClass).removeClass('highlight-white')
           $board.find('.' + squareClass).removeClass('highlight-black')
           $board.find('.square-' + move.from).addClass('highlight-black')
@@ -227,6 +230,46 @@ if (colourToMove == 'white') {
           $('#time2').text(display);
           moveColour = 'white';
           sound();
+          if (premove != null) {
+            // $board.find('.' + squareClass).removeClass('highlight-white')
+            // $board.find('.' + squareClass).removeClass('highlight-black')
+            // $board.find('.square-' + premove[]).addClass('highlight-white')
+            console.log("hihi")
+            console.log(premove);
+            var f = game.fen();
+            var move = game.move({
+              color: 'w',
+              from: premove[0] + premove[1],
+              to: premove[2] + premove[3],
+              promotion: 'q' // NOTE: always promote to a queen for example simplicity
+            });
+            if(f==game.fen()) return;
+            board.position(game.fen());
+            whiteTime += whiteBonus;
+            whiteMin = Math.floor(whiteTime / 60);
+            whiteSec = whiteTime % 60;
+            if (whiteMin < 10) {
+              whiteMin = '0' + whiteMin;
+            }
+            if (whiteSec < 10) {
+              whiteSec = '0' + whiteSec;
+            }
+            var display = whiteMin + ':' + whiteSec;
+            $('#time1').text(display);
+            moveColour = 'black';
+            window.setTimeout(makeMove, 150);
+            var pgn = game.pgn();
+            pgn = String(pgn);
+            const dummyarray = pgn.split("\n");
+            const pgnArray = dummyarray[pgnGetIndex].split(" ");
+            pgnIndex++;
+            addMove(pgnArray[pgnIndex], 1, pgnArray[pgnIndex - 1]);
+            pgnIndex++;
+            movesPlayed++;
+            moveIndex++;
+            sound();
+            premove = null;
+          }
         }
       };
     }
@@ -245,7 +288,12 @@ if (colourToMove == 'white') {
       $board.find('.square-' + source).addClass('highlight-white')
       $board.find('.square-' + target).addClass('highlight-white')
       colorToHighlight = 'white'
-      if (move === null) return 'snapback';
+      if (move === null) {
+        premove = source + target;
+        console.log("premove")
+        console.log(premove);
+        return "snapback";
+      }
       whiteTime += whiteBonus;
       whiteMin = Math.floor(whiteTime / 60);
       whiteSec = whiteTime % 60;

@@ -260,9 +260,9 @@ h2 {
 
 #moves {
     color: rgb(42, 42, 42);
-    font-size: 32px;
+    font-size: 34px;
     /* text-align: center; */
-    height: 220px;
+    height: 260px;
     overflow: auto;
 }
 
@@ -314,14 +314,14 @@ h2 {
     position: relative;
     display: inline-block;
     width: 0px;
-    margin-left: 130px;
+    margin-left: 115px;
 }
 
 .blackMove {
     position: relative;
     display: inline-block;
     width: 0px;
-    margin-left: 150px;
+    margin-left: 155px;
 }
 
 #sync {

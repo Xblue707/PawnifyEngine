@@ -113,3 +113,7 @@ p {
   padding: 0.3rem 0;
   background-color: rgb(148, 219, 41);
 }
+
+.justify-content-start{
+  justify-content: center;
+}
