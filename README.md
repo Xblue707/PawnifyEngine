@@ -8,3 +8,10 @@ Basics:
 * https://github.com/jhlywa/chess.js
 * https://github.com/niklasf/stockfish.js
 
+To clone repository, use the following command in command prompt:
+```
+git clone https://github.com/Xblue707/PawnifyEngine
+```
+Alternatively just download the zip lmao
+
+To run, just use a live server. Simply running the index.html file will not work.
