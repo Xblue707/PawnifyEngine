@@ -5,9 +5,14 @@ This is a project work done by 3 friends + me :D to tackle the problem of limite
 Other than the below JavaScript frameworks, everything else is written with VANILLA HTML, CSS, and JS.
 
 Basics:
-* http://chessboardjs.com/
+* https://github.com/oakmac/chessboardjs
 * https://github.com/jhlywa/chess.js
 * https://github.com/niklasf/stockfish.js
+
+Official docs of above frameworks:
+* https://chessboardjs.com
+* https://unpkg.com/browse/chess.js@0.11.0/README.md
+* nothing for stockfishjs lol
 
 To clone repository, use the following command in command prompt:
 ```
