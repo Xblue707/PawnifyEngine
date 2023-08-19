@@ -38,3 +38,11 @@ There are 2 sides in the play screen, the playing side and the sidebar. On the p
 ## End Screen
 
 The top section tells the user if they won/lost and by what method. The middle section has a generic player logo and the stockfish logo. The winning side will have a green border appearing around it when the game ends. At the bottom, there are 3 buttons, the "Copy PGN" button to allow users to copy the game PGN, "play again" button to play with stockfish again, and a "Customise" button, which will bring the user back to the prep screen for further customisation.
+
+## To do list (feel free to submit a PR if you want to contribute)
+
+* Playing premoves
+* Toggling of different themes
+* Improving UI (problems: basic design, choppy animations etc.)
+* Account system + fully working backend
+* Hosting on an online server for better experience
