@@ -243,7 +243,7 @@ if (colourToMove == 'white') {
               to: premove[2] + premove[3],
               promotion: 'q' // NOTE: always promote to a queen for example simplicity
             });
-            if(f==game.fen()) return;
+            if (f == game.fen()) return;
             board.position(game.fen());
             whiteTime += whiteBonus;
             whiteMin = Math.floor(whiteTime / 60);
@@ -620,10 +620,12 @@ if (colourToMove == 'white') {
       document.getElementById("lines").style.height = "100px";
       document.getElementById("lines").style.overflow = "auto";
       document.getElementById("thisisjustherecusineedittobe").style.display = "block";
+      document.getElementById("moves").style.height = "260px";
     }
     else {
       document.getElementById("lines").style.display = "none";
       document.getElementById("thisisjustherecusineedittobe").style.display = "none";
+      document.getElementById("moves").style.height = "420px";
     }
   }
 
@@ -862,6 +864,49 @@ else {
           var display = whiteMin + ':' + whiteSec;
           $('#time1').text(display);
           sound();
+          if (premove != null) {
+            var source = premove[0] + premove[1];
+            var target = premove[2] + premove[3];
+            var p = game.pgn();
+            var move = game.move({
+              color: 'b',
+              from: source,
+              to: target,
+              promotion: 'q' // NOTE: always promote to a queen for example simplicity
+            });
+            $board.find('.' + squareClass).removeClass('highlight-white')
+            $board.find('.' + squareClass).removeClass('highlight-black')
+            $board.find('.square-' + source).addClass('highlight-white')
+            $board.find('.square-' + target).addClass('highlight-white')
+            colorToHighlight = 'white'
+            blackTime += blackBonus;
+            moveColour = 'white';
+            blackMin = Math.floor(blackTime / 60);
+            blackSec = blackTime % 60;
+            if (blackMin < 10) {
+              blackMin = '0' + blackMin;
+            }
+            if (blackSec < 10) {
+              blackSec = '0' + blackSec;
+            }
+            var display = blackMin + ':' + blackSec;
+            $('#time2').text(display);
+            board.position(game.fen());
+            var pgn = game.pgn();
+            if(pgn == p){
+              return;
+            }
+            pgn = String(pgn);
+            const dummyarray = pgn.split("\n");
+            const pgnArray = dummyarray[pgnGetIndex].split(" ");
+            addMove(pgnArray[pgnIndex], 0, pgnArray[pgnIndex - 2]);
+            pgnIndex++;
+            movesPlayed++;
+            moveIndex++;
+            sound();
+            premove = null;
+            window.setTimeout(makeMove, 150);
+          }
         }
       };
     }
@@ -880,7 +925,10 @@ else {
       $board.find('.square-' + source).addClass('highlight-white')
       $board.find('.square-' + target).addClass('highlight-white')
       colorToHighlight = 'white'
-      if (move === null) return 'snapback';
+      if (move === null) {
+        premove = source + target;
+        return "snapback";
+      }
       blackTime += blackBonus;
       moveColour = 'white';
       blackMin = Math.floor(blackTime / 60);
@@ -1090,6 +1138,7 @@ else {
     document.getElementById("endScreenBigTitle").style.color = 'white';
     document.getElementById("endScreenSmallTitle").style.color = 'white';
     //Set the colourToWin variable
+    var colourToWin = nulll, wayOfWin = null;
     console.log(game.in_checkmate());
     if (game.in_checkmate() === true) {
       colourToWin = (game.turn() === 'w') ? 'black wins' : 'white wins';
@@ -1204,10 +1253,12 @@ else {
       document.getElementById("lines").style.height = "100px";
       document.getElementById("lines").style.overflow = "auto";
       document.getElementById("thisisjustherecusineedittobe").style.display = "block";
+      document.getElementById("moves").style.height = "260px";
     }
     else {
       document.getElementById("lines").style.display = "none";
       document.getElementById("thisisjustherecusineedittobe").style.display = "none";
+      document.getElementById("moves").style.height = "260px";
     }
   }
 
