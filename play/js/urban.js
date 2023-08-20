@@ -893,7 +893,7 @@ else {
             $('#time2').text(display);
             board.position(game.fen());
             var pgn = game.pgn();
-            if(pgn == p){
+            if (pgn == p) {
               return;
             }
             pgn = String(pgn);
