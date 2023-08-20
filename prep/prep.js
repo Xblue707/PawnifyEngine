@@ -1,3 +1,5 @@
+document.getElementById('fenImputBox').value = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
 function onDrop (source, target, piece, newPos, oldPos, orientation) {
   //An FEN consists of piece placement (e.g. rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR), colour to move (e.g. w), castling rights for black (e.g. KQ) and for white (e.g. kq), possible en passant targets (e.g. when white plays e4 as the first move, the FEN will be rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1)... research urself lol
   //Update FEN when any piece drop
