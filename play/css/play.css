@@ -1,13 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400&family=Montserrat:wght@100&family=Varela+Round&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;900&family=Source+Sans+3:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;500;900&family=Source+Sans+3:wght@200&display=swap');
 body {
     /* background-color: rgb(255, 255, 255); */
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     font-family: Montserrat;
-    font-weight: 500;
+    /* font-weight: 500; */
 }
 
 .sidebar {
@@ -27,8 +26,8 @@ body {
     padding-left: 0.3rem;
     color: rgb(0, 0, 0);
     font-size: 1.5rem;
-    font-family: Lato;
-    font-weight: bolder;
+    font-family: Montserrat;
+    font-weight: bold;
     padding-bottom: 0.1rem;
 }
 
@@ -40,13 +39,13 @@ body {
     border-radius: 10px;
     /* margin-top: -0.35rem; */
     border-style: solid;
-    border-color: black;
+    border-color: rgb(143, 143, 143);
 }
 
 .eval_switch_label {
     color: rgb(0, 0, 0);
     font-size: 1.2rem;
-    font-family: Lato;
+    font-family: Montserrat;
     font-weight: bolder;
     padding-right: 0.3rem;
 }
@@ -93,11 +92,11 @@ body {
 }
 
 input:checked+.slider {
-    background-color: #769656;
+    background-color: #7c7c7c;
 }
 
 input:focus+.slider {
-    box-shadow: 0 0 1px #769656;
+    box-shadow: 0 0 1px #898989;
 }
 
 input:checked+.slider:before {
@@ -118,7 +117,7 @@ input:checked+.slider:before {
 .lines_switch_label {
     color: rgb(0, 0, 0);
     font-size: 1.2rem;
-    font-family: Lato;
+    font-family: Montserrat;
     font-weight: bolder;
     padding-left: 0.3rem;
     padding-right: 0.3rem;
@@ -138,7 +137,7 @@ h2 {
 
 .white,
 .black {
-    font-family: Lato;
+    font-family: Montserrat;
     font-size: 1rem;
     font-weight: bolder;
     padding: 0.5rem;
@@ -173,7 +172,7 @@ h2 {
 .line9,
 .line10 {
     color: rgb(0, 0, 0);
-    font-family: Lato;
+    font-family: Montserrat;
     font-size: 1rem;
     margin-left: 0.5rem;
 }
@@ -205,9 +204,9 @@ h2 {
 #forward-button,
 #resign {
     color: rgb(255, 255, 255);
-    background-color: rgb(108, 108, 108);
+    background-color: rgb(174, 174, 174);
     font-size: 1.5rem;
-    border-color: rgb(108, 108, 108);
+    border-color: rgb(174, 174, 174);
     position: absolute;
     width: 150px;
     top: 585px;
@@ -400,7 +399,7 @@ h2 {
     align-items: center;
     border: 2px solid rgb(6, 161, 40);
     box-sizing: border-box;
-    font-family: 'Source Sans 3', sans-serif;
+    font-family: Montserrat;
     border-radius: 10px;
     font-size: 25px;
     font-weight: bolder;
