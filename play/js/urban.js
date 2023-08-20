@@ -893,7 +893,7 @@ else {
             $('#time2').text(display);
             board.position(game.fen());
             var pgn = game.pgn();
-            if (pgn == p) {
+            if(pgn == p){
               return;
             }
             pgn = String(pgn);
@@ -1138,7 +1138,6 @@ else {
     document.getElementById("endScreenBigTitle").style.color = 'white';
     document.getElementById("endScreenSmallTitle").style.color = 'white';
     //Set the colourToWin variable
-    var colourToWin = nulll, wayOfWin = null;
     console.log(game.in_checkmate());
     if (game.in_checkmate() === true) {
       colourToWin = (game.turn() === 'w') ? 'black wins' : 'white wins';
